@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Finder</title>
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,#080816,#31104b);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+.card {
+  width: 85%;
+  max-width: 380px;
+  padding: 25px;
+  border-radius: 20px;
+  background: #ffffff12;
+  border: 1px solid #ffffff30;
+  text-align: center;
+}
+input, button {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+input { border: 0; }
+button {
+  border: 0;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+.ig { background: linear-gradient(90deg,#f09433,#dc2743,#bc1888); }
+.tt { background: #111; border: 1px solid #555; }
+.search { background: #6741d9; }
+p { color: #d4cbe5; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>🔍 SOCIAL FINDER</h2>
+  <p>Temukan profil media sosial publik</p>
+
+  <input id="nama"
+    placeholder="Username (tanpa @)"
+    maxlength="30">
+
+  <button class="ig" onclick="profil('ig')">
+    📸 Buka Instagram
+  </button>
+
+  <button class="tt" onclick="profil('tt')">
+    🎵 Buka TikTok
+  </button>
+
+  <hr style="border-color:#ffffff30;margin-top:22px">
+
+  <input id="kata"
+    placeholder="Cari nama atau kata kunci">
+
+  <button class="search" onclick="cari()">
+    🔎 Cari Akun di Google
+  </button>
+
+  <p>Hanya menampilkan informasi publik yang tersedia.</p>
+</div>
+
+<script>
+function profil(platform) {
+  const nama = document.getElementById("nama")
+    .value.trim().replace(/^@/, "");
+
+  if (!/^[a-zA-Z0-9._]{1,30}$/.test(nama)) {
+    alert("Masukkan username yang valid.");
+    return;
+  }
+
+  const url = platform === "ig"
+    ? "https://www.instagram.com/" + nama + "/"
+    : "https://www.tiktok.com/@" + nama;
+
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+function cari() {
+  const kata = document.getElementById("kata")
+    .value.trim();
+
+  if (!kata) {
+    alert("Masukkan nama atau kata kunci.");
+    return;
+  }
+
+  window.open(
+    "https://www.google.com/search?q=" +
+    encodeURIComponent(
+      kata + " (site:instagram.com OR site:tiktok.com)"
+    ),
+    "_blank",
+    "noopener,noreferrer"
+  );
+}
+</script>
+</body>
+</html>
